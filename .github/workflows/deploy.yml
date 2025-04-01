@@ -18,7 +18,7 @@ jobs:
         server: ftp.cluster029.hosting.ovh.net
         username: ${{ secrets.FTP_USERNAME }} # Utilise le secret GitHub
         password: ${{ secrets.FTP_PASSWORD }} # Utilise le secret GitHub
-        server-dir: / # Répertoire cible sur le serveur FTP (ajuster si nécessaire, ex: /www/ ou /public_html/)
+        server-dir: /www/projet/podcast # Répertoire cible sur le serveur FTP mis à jour
         # Vous pouvez décommenter et ajuster les lignes suivantes si besoin :
         # local-dir: ./ # Répertoire local à déployer (par défaut, la racine du projet)
         # exclude: .git*/**,.git* # Exclure les fichiers/dossiers Git
