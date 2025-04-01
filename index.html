@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposition de Contenu Médical</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Proposez Votre Expertise Médicale</h1>
+        <p>Participez à notre initiative en proposant des sujets pour une recherche avancée, un podcast captivant, ou un compte-rendu détaillé.</p>
+        <p>Chaque jour, nous sélectionnons le thème le plus pertinent et innovant parmi les propositions reçues.</p>
+
+        <form id="content-form">
+            <div class="form-group">
+                <label for="email">Votre Adresse E-mail :</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Votre Proposition de Sujet :</label>
+                <textarea id="subject" name="subject" rows="4" required></textarea>
+            </div>
+            <button type="submit">Envoyer la Proposition</button>
+            <p id="response-message"></p>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
