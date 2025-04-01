@@ -1,0 +1,25 @@
+name: Deploy to FTP
+
+on:
+  push:
+    branches:
+      - main # Déclenche le workflow sur les push vers la branche main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3 # Action pour récupérer le code du dépôt
+
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3 # Action pour le déploiement FTP
+      with:
+        server: ftp.cluster029.hosting.ovh.net
+        username: ${{ secrets.FTP_USERNAME }} # Utilise le secret GitHub
+        password: ${{ secrets.FTP_PASSWORD }} # Utilise le secret GitHub
+        server-dir: / # Répertoire cible sur le serveur FTP (ajuster si nécessaire, ex: /www/ ou /public_html/)
+        # Vous pouvez décommenter et ajuster les lignes suivantes si besoin :
+        # local-dir: ./ # Répertoire local à déployer (par défaut, la racine du projet)
+        # exclude: .git*/**,.git* # Exclure les fichiers/dossiers Git
+        # dangerous-clean-slate: true # ATTENTION: Supprime tout sur le serveur avant de copier. À utiliser avec prudence. 
