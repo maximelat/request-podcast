@@ -1,81 +1,140 @@
+/* Import d'une police plus proche de San Francisco (utilisée par Apple) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Utilisation de la police importée */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: #eaf6ff; /* Light blue background */
-    color: #333;
+    padding: 40px 20px; /* Ajout de padding global */
+    background-color: #f5f5f7; /* Gris clair Apple */
+    color: #1d1d1f; /* Noir Apple */
     display: flex;
+    flex-direction: column; /* Pour placer le footer en bas */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    box-sizing: border-box; /* Inclure padding dans la hauteur */
 }
 
 .container {
     background-color: #ffffff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 90%;
+    padding: 50px 40px; /* Augmentation du padding */
+    border-radius: 18px; /* Arrondi plus prononcé Apple */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Ombre plus douce */
+    max-width: 580px; /* Légère réduction de la largeur max */
+    width: 100%; /* Prend toute la largeur disponible jusqu'au max */
     text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Bordure très subtile */
+    margin-bottom: 40px; /* Espace avant le footer */
 }
 
 h1 {
-    color: #005a9e; /* Darker blue for heading */
-    margin-bottom: 15px;
+    color: #1d1d1f; /* Noir Apple */
+    font-size: 2.2rem; /* Taille plus grande */
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
 p {
-    color: #4a4a4a;
-    line-height: 1.6;
-    margin-bottom: 20px;
+    color: #515154; /* Gris foncé Apple */
+    line-height: 1.65;
+    margin-bottom: 25px;
+    font-size: 1.05rem; /* Taille légèrement augmentée */
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: left;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #005a9e; /* Darker blue for labels */
+    margin-bottom: 10px;
+    font-weight: 600; /* Moins gras */
+    color: #333;
+    font-size: 0.95rem;
 }
 
 .form-group input[type="email"],
 .form-group textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #b0c4de; /* Lighter blue border */
-    border-radius: 5px;
+    padding: 15px; /* Plus de padding interne */
+    border: 1px solid #d2d2d7; /* Gris bordure Apple */
+    border-radius: 12px; /* Arrondi plus prononcé */
     box-sizing: border-box;
     font-size: 1rem;
+    font-family: inherit; /* Hériter la police du body */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Animation */
+}
+
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #007aff; /* Bleu Apple pour focus */
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2); /* Halo de focus */
 }
 
 .form-group textarea {
     resize: vertical;
+    min-height: 100px; /* Hauteur minimale */
 }
 
 button[type="submit"] {
-    background-color: #007bff; /* Bright blue button */
+    background-color: #007aff; /* Bleu Apple */
     color: white;
-    padding: 12px 25px;
+    padding: 15px 30px; /* Padding ajusté */
     border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
+    border-radius: 12px; /* Arrondi cohérent */
+    font-size: 1.05rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out; /* Animation */
     width: 100%;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #005ecb; /* Bleu légèrement plus foncé au survol */
+}
+
+button[type="submit"]:active {
+    transform: scale(0.98); /* Effet d'appui */
+}
+
+button[type="submit"]:disabled {
+    background-color: #a0cfff; /* Bleu plus pâle si désactivé */
+    cursor: not-allowed;
 }
 
 #response-message {
-    margin-top: 20px;
-    font-weight: bold;
+    margin-top: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Style du Footer */
+footer {
+    text-align: center;
+    margin-top: auto; /* Pousse le footer en bas si peu de contenu */
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #86868b; /* Gris secondaire Apple */
+}
+
+footer p {
+    margin: 5px 0;
+    color: inherit; /* Hériter la couleur du footer */
+    font-size: inherit; /* Hériter la taille */
+    line-height: 1.4;
+}
+
+footer a {
+    color: #007aff; /* Bleu Apple */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+footer a:hover {
+    color: #005ecb;
+    text-decoration: underline;
 } 
