@@ -1,129 +1,182 @@
-/* Import d'une police */
+/* Import des polices */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* --- Keyframes --- */
+/* --- Keyframes Améliorés --- */
 @keyframes fadeInSlideUp {
-  from { opacity: 0; transform: translateY(15px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulseGlow {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--glow-color)); }
-  50% { transform: scale(1.07); filter: drop-shadow(0 0 14px var(--glow-color)); }
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px var(--glow-color)); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 20px var(--glow-color)); }
 }
 
-@keyframes subtleShimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes backgroundPan {
+@keyframes gradientFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-@keyframes subtleRotate {
-    from { transform: rotate(-1deg) scale(1.01); }
-    to { transform: rotate(1deg) scale(1.01); }
+@keyframes borderGlow {
+  0%, 100% { border-color: var(--accent-glow-soft); }
+  50% { border-color: var(--accent-glow); }
 }
 
-/* --- Variables CSS (Nuances de Bleu Luxe) --- */
+@keyframes floatingIcon {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-5px) rotate(-2deg); }
+  75% { transform: translateY(5px) rotate(2deg); }
+}
+
+@keyframes buttonPulse {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50% { box-shadow: 0 0 0 6px var(--button-glow); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-150%); }
+  100% { transform: translateX(150%); }
+}
+
+/* --- Variables CSS (Nuances de Bleu Premium) --- */
 :root {
-    --bg-gradient-start: #0d1b2a;  /* Encore plus sombre */
-    --bg-gradient-mid: #1b263b;   /* Bleu acier foncé */
-    --bg-gradient-end: #415a77;   /* Bleu-gris profond */
-    --container-bg: rgba(27, 38, 59, 0.8); /* Conteneur plus opaque, couleur acier */
-    --container-border: rgba(119, 141, 169, 0.25); /* Bordure plus visible */
-    --text-primary: #e0fbfc; /* Blanc très légèrement cyan */
-    --text-secondary: #a9c0e0; /* Texte secondaire (gris-bleu plus doux) */
-    --accent-gradient-start: #9bf6ff; /* Cyan très clair, presque blanc */
-    --accent-gradient-end: #a0c4ff;   /* Bleu pastel clair */
-    --accent-glow: var(--accent-gradient-start);
-    --input-bg: rgba(13, 27, 42, 0.8); /* Fond input très foncé */
-    --input-border: rgba(65, 90, 119, 0.5);
+    /* Couleurs primaires */
+    --bg-gradient-start: #040F16;  /* Bleu noir profond */
+    --bg-gradient-mid: #0B2545;   /* Bleu royal profond */
+    --bg-gradient-end: #13315C;   /* Bleu royal foncé */
+    
+    /* Accents et conteneur */
+    --container-bg: rgba(12, 30, 54, 0.85);
+    --container-border: rgba(42, 84, 134, 0.3);
+    --container-glow: rgba(46, 196, 255, 0.08);
+    
+    /* Texte */
+    --text-primary: #F7FAFF; /* Blanc bleuté éclatant */
+    --text-secondary: #B8C5D6; /* Bleu gris clair */
+    
+    /* Accents */
+    --accent-gradient-start: #00E5FF; /* Cyan électrique */
+    --accent-gradient-end: #2979FF;  /* Bleu royal vif */
+    --accent-glow: rgba(0, 229, 255, 0.8);
+    --accent-glow-soft: rgba(0, 229, 255, 0.3);
+    
+    /* Éléments interactifs */
+    --input-bg: rgba(9, 21, 38, 0.9);
+    --input-border: rgba(65, 128, 195, 0.4);
     --input-focus-border: var(--accent-gradient-start);
-    --input-focus-glow: rgba(155, 246, 255, 0.15);
-    --button-text: #0d1b2a; /* Texte bouton très foncé */
-    --footer-text: #778da9; /* Texte footer (bleu-gris moyen) */
+    --input-focus-glow: rgba(0, 229, 255, 0.2);
+    --button-text: #041E42;
+    --button-glow: rgba(0, 229, 255, 0.25);
+    
+    /* Footer */
+    --footer-text: #8BA1BD;
 }
 
 /* --- Styles Globaux --- */
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
-    /* Padding réduit pour moins de hauteur */
-    padding: 20px 20px;
-    background: linear-gradient(215deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
-    background-size: 250% 250%;
+    padding: 15px 20px; /* Padding réduit pour moins de hauteur */
+    background: linear-gradient(200deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
+    background-size: 200% 200%;
     color: var(--text-primary);
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centrer verticalement si possible, sinon space-between agira */
+    justify-content: center;
     align-items: center;
     min-height: 100vh;
     box-sizing: border-box;
-    animation: backgroundPan 25s ease infinite;
+    animation: gradientFlow 20s ease infinite;
     overflow-x: hidden;
 }
 
 /* --- Conteneur Principal --- */
 .container {
     background: var(--container-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    /* Padding T/B réduit */
-    padding: 35px 40px;
-    border-radius: 18px;
-    /* Ombre plus douce et diffuse */
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0,0,0,0.3), inset 0 0px 1px rgba(155, 246, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 28px 35px; /* Padding réduit */
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), 0 0 20px var(--container-glow), inset 0 0 1px rgba(255, 255, 255, 0.2);
     border: 1px solid var(--container-border);
-    max-width: 540px;
+    max-width: 520px;
     width: 100%;
     text-align: center;
-    /* Margin bottom réduite */
-    margin: 15px 0;
+    margin: 10px 0; /* Marge réduite */
     position: relative;
     overflow: hidden;
-    animation: fadeInSlideUp 0.7s cubic-bezier(0.25, 1, 0.5, 1) 0.1s forwards;
+    animation: fadeInSlideUp 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     z-index: 1;
     display: flex;
     flex-direction: column;
 }
 
+/* Effet de brillance sur le bord */
+.container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    animation: borderGlow 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Effet de brillance traversant */
+.container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+    );
+    transform: skewX(-15deg);
+    animation: shimmer 8s infinite;
+    z-index: 0;
+}
+
 /* --- Icône d'Entête --- */
 .header-icon {
-    margin-bottom: 15px;
-    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.2s both;
+    margin-bottom: 10px; /* Réduit */
+    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.1s both;
+    position: relative;
+    z-index: 1;
 }
 
 .header-icon i {
-    font-size: 3.2rem;
+    font-size: 3rem;
     background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    padding: 12px;
+    padding: 8px; /* Réduit */
     border-radius: 50%;
     display: inline-block;
     position: relative;
     --glow-color: var(--accent-glow);
-    animation: pulseGlow 5s infinite ease-in-out;
-    /* Animation subtile rotation */
-    /* animation: pulseGlow 5s infinite ease-in-out, subtleRotate 10s alternate infinite ease-in-out; */
+    animation: pulseGlow 4s infinite ease-in-out, floatingIcon 6s ease-in-out infinite;
 }
 
 /* --- Typographie --- */
 h1 {
     color: var(--text-primary);
-    font-size: 2rem;
+    font-size: 1.8rem; /* Taille réduite */
     font-weight: 700;
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 10px; /* Réduit */
     position: relative;
-    padding-bottom: 8px;
+    padding-bottom: 6px; /* Réduit */
     letter-spacing: -0.3px;
-    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both;
+    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.2s both;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
 }
 
 h1::after {
@@ -132,7 +185,7 @@ h1::after {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
+    width: 50px;
     height: 2.5px;
     background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
     border-radius: 1.5px;
@@ -140,52 +193,61 @@ h1::after {
 
 p {
     color: var(--text-secondary);
-    line-height: 1.65;
-    margin-bottom: 20px;
-    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 16px; /* Réduit */
+    font-size: 0.9rem; /* Réduit */
     font-weight: 400;
-    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.4s both;
+    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both;
     flex-shrink: 0;
 }
 
-/* Lien LinkedIn dans le paragraphe */
+/* Lien LinkedIn dans le paragraphe amélioré */
 p a.linkedin-link {
     color: var(--accent-gradient-start);
     text-decoration: none;
     font-weight: 500;
     position: relative;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: gradientFlow 4s ease infinite;
 }
 
 p a.linkedin-link::after {
     content: '';
     position: absolute;
-    width: 0%;
+    width: 100%;
     height: 1px;
-    bottom: -2px;
+    bottom: -1px;
     left: 0;
-    background-color: var(--accent-gradient-start);
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
 }
 
 p a.linkedin-link:hover {
-    color: var(--text-primary);
-    text-shadow: 0 0 6px var(--accent-glow);
+    text-shadow: 0 0 8px var(--accent-glow);
 }
 
 p a.linkedin-link:hover::after {
-    width: 100%;
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 /* --- Formulaire --- */
 form {
     flex-shrink: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 14px; /* Réduit */
     text-align: left;
-    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) calc(0.4s + var(--i, 0) * 0.1s) both;
+    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) calc(0.3s + var(--i, 0) * 0.1s) both;
 }
 
 .form-group:nth-child(1) { --i: 1; }
@@ -193,16 +255,16 @@ form {
 
 .form-group label {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 4px; /* Réduit */
     font-weight: 500;
     color: var(--text-secondary);
     font-size: 0.85rem;
     letter-spacing: 0.3px;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .form-group label i {
-    margin-right: 6px;
+    margin-right: 5px;
     font-size: 0.9em;
     color: var(--accent-gradient-start);
     transition: transform 0.3s ease;
@@ -210,16 +272,18 @@ form {
 
 .form-group:focus-within label {
     color: var(--text-primary);
+    transform: translateX(2px);
 }
 
 .form-group:focus-within label i {
-    transform: scale(1.1);
+    transform: scale(1.2) rotate(-5deg);
+    color: var(--accent-gradient-end);
 }
 
 .form-group input[type="email"],
 .form-group textarea {
     width: 100%;
-    padding: 12px;
+    padding: 10px 12px; /* Réduit */
     background: var(--input-bg);
     border: 1px solid var(--input-border);
     border-radius: 8px;
@@ -234,36 +298,37 @@ form {
 .form-group input[type="email"]::placeholder,
 .form-group textarea::placeholder {
     color: var(--footer-text);
-    opacity: 1;
+    opacity: 0.6;
 }
 
 .form-group input[type="email"]:hover,
 .form-group textarea:hover {
-    border-color: rgba(155, 246, 255, 0.5);
-    background: rgba(13, 27, 42, 1);
-    transform: translateY(0px);
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 229, 255, 0.5);
+    background: rgba(9, 21, 38, 1);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .form-group input[type="email"]:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--input-focus-border);
-    background: rgba(13, 27, 42, 1);
-    box-shadow: 0 0 0 3px var(--input-focus-glow), 0 2px 8px rgba(0, 0, 0, 0.3);
-    transform: translateY(0px) scale(1.00);
+    background: rgba(9, 21, 38, 1);
+    box-shadow: 0 0 0 2px var(--input-focus-glow), 0 4px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
 
 .form-group textarea {
     resize: vertical;
-    min-height: 90px;
+    min-height: 80px; /* Réduit */
 }
 
 /* --- Bouton Principal --- */
 button[type="submit"] {
     background: linear-gradient(135deg, var(--accent-gradient-start) 0%, var(--accent-gradient-end) 100%);
+    background-size: 200% auto;
     color: var(--button-text);
-    padding: 12px 28px;
+    padding: 10px 25px; /* Réduit */
     border: none;
     border-radius: 8px;
     font-size: 0.95rem;
@@ -272,26 +337,40 @@ button[type="submit"] {
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
     width: 100%;
-    margin-top: 12px;
+    margin-top: 10px; /* Réduit */
     position: relative;
     overflow: hidden;
-    box-shadow: 0 5px 12px rgba(155, 246, 255, 0.15);
+    box-shadow: 0 5px 15px rgba(0, 229, 255, 0.2);
     display: inline-flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.7s both;
+    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.5s both, gradientFlow 8s infinite;
+}
+
+button[type="submit"]::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    z-index: -1;
+    background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end));
+    border-radius: 10px;
+    animation: buttonPulse 3s infinite;
+    opacity: 0.7;
 }
 
 button[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(155, 246, 255, 0.2);
-    filter: brightness(1.1);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 229, 255, 0.3);
+    filter: brightness(1.15);
 }
 
 button[type="submit"]:active {
-    transform: translateY(0px);
-    box-shadow: 0 3px 8px rgba(155, 246, 255, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 229, 255, 0.2);
     filter: brightness(1);
 }
 
@@ -300,11 +379,11 @@ button[type="submit"] i {
 }
 
 button[type="submit"]:hover i {
-    transform: translateX(3px) rotate(3deg);
+    transform: translateX(5px) rotate(15deg);
 }
 
 button[type="submit"]:disabled {
-    background: linear-gradient(135deg, #415a77, #778da9);
+    background: linear-gradient(135deg, #506685, #7B93B0);
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
@@ -313,53 +392,54 @@ button[type="submit"]:disabled {
 
 /* --- Message de Réponse --- */
 #response-message {
-    margin-top: 18px;
+    margin-top: 14px; /* Réduit */
+    margin-bottom: 0;
     font-weight: 500;
     font-size: 0.85rem;
-    padding: 8px 12px;
+    padding: 8px 10px;
     border-radius: 6px;
-    min-height: 1.4em;
+    min-height: 1.3em;
     transition: all 0.4s ease;
     opacity: 0;
     transform: translateY(8px);
 }
 
 #response-message:not(:empty) {
-    background: rgba(13, 27, 42, 0.9);
+    background: rgba(9, 21, 38, 0.9);
     opacity: 1;
     transform: translateY(0);
 }
 
 #response-message[style*="color: green"] {
-    background: rgba(155, 246, 255, 0.1);
+    background: rgba(0, 229, 255, 0.1);
     color: var(--accent-gradient-start);
-    border: 1px solid rgba(155, 246, 255, 0.2);
+    border: 1px solid rgba(0, 229, 255, 0.2);
 }
 
 #response-message[style*="color: red"] {
-    background: rgba(255, 160, 180, 0.1);
-    color: #ffa0b4; /* Rose plus clair */
-    border: 1px solid rgba(255, 160, 180, 0.2);
+    background: rgba(255, 69, 96, 0.1);
+    color: #FF4560;
+    border: 1px solid rgba(255, 69, 96, 0.2);
 }
 
 /* --- Footer --- */
 footer {
     text-align: center;
-    margin-top: 15px;
-    padding: 10px 20px;
+    margin-top: 12px; /* Réduit */
+    padding: 8px 20px; /* Réduit */
     font-size: 0.8rem;
     color: var(--footer-text);
     width: 100%;
-    max-width: 540px;
-    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.8s both;
+    max-width: 520px;
+    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.6s both;
     flex-shrink: 0;
 }
 
 footer p {
-    margin: 4px 0;
+    margin: 3px 0; /* Réduit */
     color: inherit;
     font-size: inherit;
-    line-height: 1.4;
+    line-height: 1.3;
     animation: none;
 }
 
@@ -367,9 +447,9 @@ footer p {
 .footer-links {
     display: flex;
     justify-content: center;
-    gap: 15px; /* Espace entre les liens */
-    flex-wrap: wrap; /* Retour à la ligne si nécessaire */
-    margin-top: 5px;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 4px; /* Réduit */
 }
 
 footer a {
@@ -378,77 +458,88 @@ footer a {
     transition: all 0.3s ease;
     position: relative;
     font-weight: 500;
-    display: inline-flex; /* Pour aligner icône */
+    display: inline-flex;
     align-items: center;
+    background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: gradientFlow 4s ease infinite;
 }
 
 footer a i {
-    margin-right: 5px;
-    font-size: 1.1em; /* Icônes légèrement plus grandes */
+    margin-right: 4px;
+    font-size: 1.1em;
 }
 
 footer a:hover {
-    color: var(--text-primary);
     filter: brightness(1.2);
-    text-shadow: 0 0 5px var(--accent-glow);
+    text-shadow: 0 0 8px var(--accent-glow);
 }
 
 /* --- Responsive Design (Peaufiné) --- */
 @media (max-width: 600px) {
     body {
-        padding: 15px;
+        padding: 10px;
     }
     .container {
-        padding: 25px 20px;
-        border-radius: 16px;
-        margin: 10px 0;
+        padding: 20px 18px;
+        border-radius: 14px;
+        margin: 5px 0;
         max-width: 95%;
     }
     h1 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
     p {
-        font-size: 0.9rem;
-        margin-bottom: 15px;
+        font-size: 0.85rem;
+        margin-bottom: 12px;
     }
     .form-group input[type="email"],
     .form-group textarea,
     button[type="submit"] {
-        padding: 10px;
+        padding: 8px 10px;
         font-size: 0.9rem;
         border-radius: 6px;
     }
+    .form-group textarea {
+        min-height: 70px;
+    }
     button[type="submit"] {
         font-size: 0.9rem;
-        padding: 10px 20px;
+        padding: 8px 16px;
     }
     footer {
         font-size: 0.75rem;
         max-width: 95%;
+        padding: 5px;
     }
     .footer-links {
-        gap: 10px;
+        gap: 8px;
     }
 }
 
 @media (max-width: 400px) {
-     h1 {
-        font-size: 1.4rem;
+    .container {
+        padding: 15px 15px;
+    }
+    h1 {
+        font-size: 1.3rem;
     }
     h1::after {
-        width: 50px;
+        width: 40px;
     }
-     p {
-        font-size: 0.85rem;
+    p {
+        font-size: 0.8rem;
     }
     .form-group label {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
     footer {
         font-size: 0.7rem;
     }
     .footer-links {
-        flex-direction: column; /* Liens l'un sous l'autre sur très petits écrans */
-        gap: 5px;
+        flex-direction: column;
+        gap: 3px;
     }
 } 
