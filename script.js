@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const textarea = document.getElementById('subject');
     const counter = document.getElementById('char-count');
     const charCounter = document.querySelector('.char-counter');
-    const MAX_CHARS = 220;
+    const MAX_CHARS = 200;
     
     // Fonction pour mettre à jour le compteur
     function updateCounter() {
