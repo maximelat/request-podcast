@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gestion du compteur de caractères
     const subjectInput = document.getElementById('subject');
     const charCount = document.getElementById('char-count');
-    const maxLength = parseInt(subjectInput.getAttribute('maxlength') || 300);
+    const maxLength = parseInt(subjectInput.getAttribute('maxlength') || 220);
     
     // Initialiser le compteur
     function updateCharCount() {
