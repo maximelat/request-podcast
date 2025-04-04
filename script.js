@@ -2,12 +2,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('content-form');
     const responseMessage = document.getElementById('response-message');
     const webhookUrl = 'https://hook.eu2.make.com/fijk5sq6bdtf98cmqljh4nij1a722km7';
+    
+    // Gestion du compteur de caractères
+    const subjectInput = document.getElementById('subject');
+    const charCount = document.getElementById('char-count');
+    const maxLength = subjectInput.getAttribute('maxlength');
+    
+    // Initialiser le compteur
+    function updateCharCount() {
+        const currentLength = subjectInput.value.length;
+        charCount.textContent = currentLength;
+        
+        const charCounter = charCount.parentElement;
+        
+        // Mise à jour des classes en fonction du nombre de caractères
+        if (currentLength >= maxLength) {
+            charCounter.classList.add('limit-reached');
+            charCounter.classList.remove('limit-near');
+        } else if (currentLength >= maxLength * 0.8) {
+            charCounter.classList.add('limit-near');
+            charCounter.classList.remove('limit-reached');
+        } else {
+            charCounter.classList.remove('limit-near', 'limit-reached');
+        }
+    }
+    
+    // Écouter les événements de saisie pour mettre à jour le compteur
+    subjectInput.addEventListener('input', updateCharCount);
+    
+    // Initialiser le compteur au chargement
+    updateCharCount();
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault(); // Empêche le rechargement de la page
 
         const emailInput = document.getElementById('email');
-        const subjectInput = document.getElementById('subject');
         const submitButton = form.querySelector('button[type="submit"]');
 
         const email = emailInput.value;
