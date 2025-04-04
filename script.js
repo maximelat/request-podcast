@@ -6,37 +6,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gestion du compteur de caractères
     const subjectInput = document.getElementById('subject');
     const charCount = document.getElementById('char-count');
-    const maxLength = parseInt(subjectInput.getAttribute('maxlength'));
+    const maxLength = parseInt(subjectInput.getAttribute('maxlength') || 300);
     
     // Initialiser le compteur
     function updateCharCount() {
         const currentLength = subjectInput.value.length;
         charCount.textContent = currentLength;
         
-        const charCounter = charCount.parentElement;
+        const charCounter = charCount.closest('.char-counter');
         
         // Mise à jour des classes en fonction du nombre de caractères
         if (currentLength >= maxLength) {
             charCounter.classList.add('limit-reached');
             charCounter.classList.remove('limit-near');
-        } else if (currentLength >= maxLength * 0.8) {
+        } else if (currentLength >= Math.floor(maxLength * 0.8)) {
             charCounter.classList.add('limit-near');
             charCounter.classList.remove('limit-reached');
         } else {
             charCounter.classList.remove('limit-near', 'limit-reached');
         }
+        
+        console.log(`Caractères: ${currentLength}/${maxLength}, Classes: ${charCounter.className}`);
     }
     
     // Écouter les événements de saisie pour mettre à jour le compteur
     subjectInput.addEventListener('input', updateCharCount);
     subjectInput.addEventListener('keyup', updateCharCount);
     subjectInput.addEventListener('change', updateCharCount);
+    subjectInput.addEventListener('focus', updateCharCount);
+    subjectInput.addEventListener('blur', updateCharCount);
+    
+    // Mise à jour immédiate au chargement de la page
+    updateCharCount();
+    
+    // Écouteur pour les événements de collage
     subjectInput.addEventListener('paste', () => {
         setTimeout(updateCharCount, 10);
     });
-    
-    // Initialiser le compteur au chargement
-    updateCharCount();
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault(); // Empêche le rechargement de la page
