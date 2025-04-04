@@ -3,45 +3,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const responseMessage = document.getElementById('response-message');
     const webhookUrl = 'https://hook.eu2.make.com/fijk5sq6bdtf98cmqljh4nij1a722km7';
     
-    // Gestion du compteur de caractères
-    const subjectInput = document.getElementById('subject');
-    const charCount = document.getElementById('char-count');
-    const maxLength = parseInt(subjectInput.getAttribute('maxlength') || 220);
+    // Compteur de caractères - version simplifiée
+    const textarea = document.getElementById('subject');
+    const counter = document.getElementById('char-count');
+    const charCounter = document.querySelector('.char-counter');
+    const MAX_CHARS = 220;
     
-    // Initialiser le compteur
-    function updateCharCount() {
-        const currentLength = subjectInput.value.length;
-        charCount.textContent = currentLength;
+    // Fonction pour mettre à jour le compteur
+    function updateCounter() {
+        // Obtenir la longueur actuelle du texte
+        const length = textarea.value.length;
         
-        const charCounter = charCount.closest('.char-counter');
+        // Mettre à jour le texte du compteur
+        counter.textContent = length;
         
-        // Mise à jour des classes en fonction du nombre de caractères
-        if (currentLength >= maxLength) {
-            charCounter.classList.add('limit-reached');
-            charCounter.classList.remove('limit-near');
-        } else if (currentLength >= Math.floor(maxLength * 0.8)) {
-            charCounter.classList.add('limit-near');
-            charCounter.classList.remove('limit-reached');
+        // Définir les classes en fonction du nombre de caractères
+        if (length >= MAX_CHARS) {
+            charCounter.className = 'char-counter limit-reached';
+        } else if (length >= MAX_CHARS * 0.8) {
+            charCounter.className = 'char-counter limit-near';
         } else {
-            charCounter.classList.remove('limit-near', 'limit-reached');
+            charCounter.className = 'char-counter';
         }
-        
-        console.log(`Caractères: ${currentLength}/${maxLength}, Classes: ${charCounter.className}`);
     }
     
-    // Écouter les événements de saisie pour mettre à jour le compteur
-    subjectInput.addEventListener('input', updateCharCount);
-    subjectInput.addEventListener('keyup', updateCharCount);
-    subjectInput.addEventListener('change', updateCharCount);
-    subjectInput.addEventListener('focus', updateCharCount);
-    subjectInput.addEventListener('blur', updateCharCount);
+    // Appliquer les écouteurs d'événements
+    ['input', 'keyup', 'keydown', 'change', 'paste', 'focus', 'blur'].forEach(event => {
+        textarea.addEventListener(event, updateCounter);
+    });
     
-    // Mise à jour immédiate au chargement de la page
-    updateCharCount();
+    // Mettre à jour le compteur au chargement initial
+    updateCounter();
     
-    // Écouteur pour les événements de collage
-    subjectInput.addEventListener('paste', () => {
-        setTimeout(updateCharCount, 10);
+    // Gérer les collages spéciaux
+    textarea.addEventListener('paste', () => {
+        setTimeout(updateCounter, 10);
     });
 
     form.addEventListener('submit', async (event) => {
@@ -51,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const submitButton = form.querySelector('button[type="submit"]');
 
         const email = emailInput.value;
-        const subject = subjectInput.value;
+        const subject = textarea.value;
 
         if (!email || !subject) {
             responseMessage.textContent = 'Veuillez remplir tous les champs.';
@@ -68,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Désactiver le bouton et afficher un message de chargement
         submitButton.disabled = true;
-        submitButton.textContent = 'Envoi en cours...';
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
         responseMessage.textContent = '';
         responseMessage.style.color = 'inherit'; // Reset color
 
@@ -90,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                      responseMessage.textContent = 'Merci ! Votre proposition a été envoyée avec succès.';
                      responseMessage.style.color = 'green';
                      form.reset(); // Vide le formulaire
-                     updateCharCount(); // Mettre à jour le compteur après réinitialisation
+                     updateCounter(); // Mettre à jour le compteur après réinitialisation
                 } else {
                     // Si la réponse n'est pas 'Accepted' mais le statut est OK
                     console.warn('Réponse inattendue du webhook:', responseBody);
@@ -105,12 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Erreur lors de l\'envoi au webhook:', error);
-            responseMessage.textContent = 'Une erreur est survenue l\'envoi de votre proposition. Veuillez réessayer.';
+            responseMessage.textContent = 'Une erreur est survenue lors de l\'envoi de votre proposition. Veuillez réessayer.';
             responseMessage.style.color = 'red';
         } finally {
             // Réactiver le bouton dans tous les cas
              submitButton.disabled = false;
-             submitButton.textContent = 'Envoyer la Proposition';
+             submitButton.innerHTML = '<span>Envoyer la Proposition</span> <i class="fas fa-paper-plane"></i>';
         }
     });
 }); 
