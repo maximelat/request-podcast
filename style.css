@@ -330,15 +330,21 @@ form {
     font-size: 0.75rem;
     color: var(--footer-text);
     margin-top: 4px;
+    background: rgba(9, 21, 38, 0.3);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 500;
 }
 
 .char-counter.limit-near {
     color: #FFB74D;
+    background: rgba(255, 183, 77, 0.1);
 }
 
 .char-counter.limit-reached {
     color: #FF5252;
-    font-weight: 500;
+    font-weight: 600;
+    background: rgba(255, 82, 82, 0.1);
 }
 
 /* Disclaimer */

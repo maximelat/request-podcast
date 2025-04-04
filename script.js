@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gestion du compteur de caractères
     const subjectInput = document.getElementById('subject');
     const charCount = document.getElementById('char-count');
-    const maxLength = subjectInput.getAttribute('maxlength');
+    const maxLength = parseInt(subjectInput.getAttribute('maxlength'));
     
     // Initialiser le compteur
     function updateCharCount() {
@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Écouter les événements de saisie pour mettre à jour le compteur
     subjectInput.addEventListener('input', updateCharCount);
+    subjectInput.addEventListener('keyup', updateCharCount);
+    subjectInput.addEventListener('change', updateCharCount);
+    subjectInput.addEventListener('paste', () => {
+        setTimeout(updateCharCount, 10);
+    });
     
     // Initialiser le compteur au chargement
     updateCharCount();
@@ -79,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                      responseMessage.textContent = 'Merci ! Votre proposition a été envoyée avec succès.';
                      responseMessage.style.color = 'green';
                      form.reset(); // Vide le formulaire
+                     updateCharCount(); // Mettre à jour le compteur après réinitialisation
                 } else {
                     // Si la réponse n'est pas 'Accepted' mais le statut est OK
                     console.warn('Réponse inattendue du webhook:', responseBody);
